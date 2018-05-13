@@ -1,0 +1,32 @@
+{% extends "BLOG/base.html" %}
+
+{% block content %}
+	<div class="container-fluid">
+	{% if form.errors %}
+		<p style="color:red">username and password didn't match</p>
+	{% endif %}
+  <center>
+	<div class="container-fluid">
+<!--form-stars-here-->
+  <form action="{% url 'login' %}" method="POST">
+		{% csrf_token %}
+		<input type="hidden" />
+	{% for field in form %}
+      <p style="color:black;">
+        {{ field.label_tag }}<br>
+        {{ field }}<br>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <center>
+      <button type="submit" style="background-color: rgb(219,219,219);">Log in</button>
+      <input type="hidden" name="next" value="{{next}}">
+    </center>
+    </form>
+
+</div>
+</center>
+</div>
+{% endblock %}

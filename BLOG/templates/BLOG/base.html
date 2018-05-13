@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <title>BLOG</title>
+  </head>
+  <body class="loader">
+    <nav class="navbar navbar-expand-lg navbar-light  bg-light">
+      <div class="container-fluid collapse navbar-collapse collapse " id="navbarSupportedContent">
+        <ul class=" navbar-nav mr-auto">
+          <li class="nav-item"><a class='navbar-brand bigbrand nav-link' href="{% url 'post_list' %}">My Tech blog</a></li>
+          <li class="nav-item"><a href="{% url 'about'%}" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="https://www.github.com" class="nav-link">Github</a></li>
+          <li class="nav-item"><a href="https://www.linkedin.com" class="nav-link">LinkedIn</a></li>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right mr-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'post_new' %}" >New Post</a>
+          </li>
+
+          <li class="nav-item">
+            <a  class="nav-link" href="{% url 'post_draft_list' %}">Drafts</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="{% url 'logout' %}" >Log out</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" >Welcome: {{ user.username }}</a>
+          </li>
+            {% else %}
+            <li class="nav-item"><a class='nav navbar-right nav-link' href="{% url 'login' %}" ><span class="glyphicon glyphicon-log-in"></span>LOGIN</a></li>
+          {% endif %}
+
+        </ul>
+        </div>
+          </nav>
+
+<br>
+<br>
+        <div class="content container jumbotron">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="blog_posts">
+                    {% block content %}
+                    {% endblock %}
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+
+{# SCRIPTS#}
+
+<script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
+
+
+
+
+
+  </body>
+</html>
